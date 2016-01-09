@@ -1,4 +1,5 @@
 require 'byebug'
+require 'yaml'
 
 class Tile
   attr_reader :revealed, :flagged, :has_bomb
@@ -157,10 +158,19 @@ class Board
 end
 
 class Game
+  attr_accessor :board
   def initialize(col = 9, row = 9, num_bombs=10)
     @board = Board.new(col, row, num_bombs)
     @board.populate
     @lose = false
+  end
+
+  def save_board
+    @saved_game = self.board.to_yaml
+  end
+
+  def load_board
+    self.board = YAML::load(@saved_game)
   end
 
   def play
@@ -175,7 +185,18 @@ class Game
   def turn
     @board.render_board
     puts "please make a move #,# then 'f' for flag 'r' for reveal (ex. 1,0 f)"
-    pos, move = gets.chomp.split
+    our_input = gets.chomp
+    if our_input == 'load'
+      self.load_board
+      puts "please make a move #,# then 'f' for flag 'r' for reveal (ex. 1,0 f)"
+      our_input = gets.chomp
+    end
+    if our_input == 'save'
+      self.save_board
+      puts "please make a move #,# then 'f' for flag 'r' for reveal (ex. 1,0 f)"
+      our_input = gets.chomp
+    end
+    pos, move = our_input.split
     pos = pos.split(",").map(&:to_i)
     until @board.valid_move?(pos, move)
       puts "Not a valid move!" unless pos.nil?
@@ -197,7 +218,9 @@ end
 
 
 game = Game.new()
-game.play
+#p game.to_yaml
+ game.play
+
 
 # board = Board.new
 # board.populate
