@@ -22,7 +22,7 @@ require 'towers.rb'
 
       it "prevents bigger disk from being on smaller disk" do
         tower.board = [[3,2], [1], []]
-        expect(tower.move(0,1)).to raise_error(RuntimeError)
+        expect { tower.move(0,1) }.to raise_error("errorrrr")
       end
 
    end

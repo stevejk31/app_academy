@@ -7,7 +7,9 @@ class Tower
 
 
   def move (int_pt, end_pt)
-    raise "errorrrr" unless @board[end_pt].empty? || @board[int_pt].last < @board[end_pt].last
+    if !@board[end_pt].empty?
+      raise "errorrrr" unless @board[int_pt].last < @board[end_pt].last
+    end
     @board[end_pt] << @board[int_pt].pop
     puts board
   end
