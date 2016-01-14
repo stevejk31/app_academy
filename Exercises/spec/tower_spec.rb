@@ -8,7 +8,7 @@ require 'towers.rb'
    describe "#won?" do
       it "tower is on different peg" do
         tower.board = [[], [3,2,1], []]
-        expect(tower.won?).to be_truthy
+        expect(tower.won?).to be true
       end
    end
 
@@ -29,7 +29,7 @@ require 'towers.rb'
 
    describe "#render" do
       it "displays correctly" do
-        expect(tower).to receive(:puts)#.with("  ")
+        expect(tower).to receive(:puts)
         tower.render
       end
    end

@@ -17,10 +17,16 @@ class Deck
     end
   end
 
-  def shuffle
+  def shuffle!
     @cards.shuffle!
+  end
+
+  def draw_card
+    @cards.pop
   end
 end
 
-d = Deck.new
-d.cards.shuffle.each {|card| print card.to_s}
+if $PROGRAM_NAME == __FILE__
+  d = Deck.new
+  d.cards.shuffle.each {|card| print card.to_s}
+end

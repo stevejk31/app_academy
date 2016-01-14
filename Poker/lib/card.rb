@@ -1,11 +1,11 @@
 class Card
   attr_reader :suit, :number
   attr_accessor :revealed
-
+  
   def initialize(suit, number)
     @suit = suit
     @number = number
-    @reveal = false
+    @revealed = false
   end
 
   def reveal
@@ -14,6 +14,10 @@ class Card
 
   def inspect
     [@suit, @number]
+  end
+
+  def revealed?
+    @revealed
   end
 
   def to_s
