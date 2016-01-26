@@ -1,7 +1,16 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id         :integer          not null, primary key
+#  username   :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class User < ActiveRecord::Base
 
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
-
+  validates :username, presence: true, uniqueness: true
+  has_one :contact
 
 end
