@@ -34,6 +34,15 @@ class CatRentalRequestsController < ApplicationController
     end
   end
 
+  def update
+    @cat_rr = CatRentalRequest.find_by(id: params[:id])
+    if @cat_rr.approve!
+      redirect_to cat_url(@cat_rr.cat_id)
+    else
+      fail 'no cat'
+    end
+  end
+
 
 
 

@@ -24,6 +24,9 @@
 <% @cat.cat_rental_requests.order("cat_rental_requests.start_date")
   .each do |rr| %>
   Rented from: <%= rr.start_date %> To: <%= rr.end_date %>
+  <% if rr.status == "PENDING" %>
+    <%= link_to "Approve Request", cat_rental_request_url(rr.id), method: :patch%>
+  <% end %>
   <br/>
 <% end %>
 </body>
