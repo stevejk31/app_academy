@@ -27,6 +27,7 @@ class CatsController < ApplicationController
   end
 
   def new
+    @cat = Cat.new
     @colors = Cat.all_colors
     render :new
   end
@@ -51,10 +52,20 @@ class CatsController < ApplicationController
   end
 
   def update
+    @cat = Cat.find_by(id: params[:id])
     if @cat.update(cat_params)
       redirect_to cat_url(@cat.id)
     else
       fail 'no cat'
+    end
+  end
+
+  def destroy
+    @cat = Cat.find_by(id: params[:id])
+    if @cat.destroy
+      redirect_to cats_url
+    else
+      fail 'cat destruction failed'
     end
   end
 

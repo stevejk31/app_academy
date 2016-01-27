@@ -20,4 +20,13 @@
   </tbody>
 </table>
 <br/>
+<body>
+<% @cat.cat_rental_requests.order("cat_rental_requests.start_date")
+  .each do |rr| %>
+  Rented from: <%= rr.start_date %> To: <%= rr.end_date %>
+  <br/>
+<% end %>
+</body>
+<br/>
 <%= button_to "Edit Cat", edit_cat_url, method: :get%>
+<%= button_to "MURDER Cat", cat_url(@cat.id), method: :delete%>

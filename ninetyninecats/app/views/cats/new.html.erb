@@ -1,26 +1,3 @@
 <h1>Create Cat form!</h1>
 
-<form action="<%=cats_url%>" method="post">
-  <label for="cat[name]">Name:</label>
-  <input type="text" name="cat[name]"/>
-  <br/>
-  <label for="cat[sex]">Sex:</label>
-  <br/>
-  <input type="radio" name="cat[sex]" value="M"> Male<br>
-  <input type="radio" name="cat[sex]" value="F"> Female<br>
-
-  <label for="cat[color]">Color:</label>
-  <select name="cat[color]">
-    <option value="nil" selected> options </option>
-    <% @colors.each do |color|%>
-      <option value="<%=color%>"><%=color%></option>
-    <% end %>
-  </select>
-  <br/>
-  <label for="cat[birth_date]">Birthdate:</label>
-  <input type ="date" name = "cat[birth_date]"/>
-  <br/>
-  <textarea name="cat[description]" rows="10" cols="50">Description</textarea>
-  <br/>
-  <input type="submit" value="Create cat">
-</form>
+<%= render partial: "form", locals: {cat: @cat} %>

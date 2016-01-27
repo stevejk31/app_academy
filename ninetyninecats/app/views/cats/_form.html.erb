@@ -1,5 +1,9 @@
-<form action="<%=cat_url(cat.id)%>" method="post">
+<% if cat.persisted? %>
+  <form action="<%=cat_url(cat.id)%>" method="post">
   <input name="_method" type="hidden" value="patch" />
+<% else %>
+  <form action="<%=cats_url%>" method="post">
+<% end %>
   <label for="cat[name]">Name:</label>
 
   <input type="text" name="cat[name]" value="<%= cat.name %>"/>
@@ -25,9 +29,9 @@
   <select name="cat[color]">
     <option value="<%= cat.color %>" selected> <%= cat.color %> </option>
     <% @colors.each do |color|%>
-      <% unless color == cat.color %>
-        <option value="<%=color%>"><%=color%></option>
-      <% end %>
+    <% unless color == cat.color %>
+    <option value="<%=color%>"><%=color%></option>
+    <% end %>
     <% end %>
   </select>
   <br/>
@@ -38,5 +42,10 @@
 
   <textarea name="cat[description]" rows="10" cols="50"><%= cat.description %></textarea>
   <br/>
-  <input type="submit" value="Edit cat">
+  <% if cat.persisted? %>
+    <input type="submit" value="Mutilate Cat">
+  <% else %>
+    <input type="submit" value="Create Cat">
+  <% end %>
+
 </form>

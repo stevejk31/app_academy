@@ -20,6 +20,8 @@ class Cat < ActiveRecord::Base
   validates :sex, inclusion: { in: %w(M F) }
   validates :description, presence: true
 
+  has_many :cat_rental_requests, dependent: :destroy
+
 
   def self.all_colors
     COLORS

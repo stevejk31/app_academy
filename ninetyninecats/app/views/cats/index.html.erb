@@ -1,5 +1,4 @@
 <% @cats.each do |cat| %>
-  <!-- <a href="cats/<%#cat.id%>"<%# cat.name %> </a> -->
   <%= link_to(cat.name, cat_url(cat.id) ) %>
   <br/>
 <% end %>
