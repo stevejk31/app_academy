@@ -1,0 +1,10 @@
+sub's title: <%= @sub.title %>
+
+<br>
+<br>
+
+<% @posts.each do |post| %>
+<%= link_to post.title,  post_url(post.id)%>
+<% end %>
+<%= button_to "Edit Sub", edit_sub_url(@sub.id), method: :get %>
+<%= button_to "Create Post", new_post_url, method: :get %>

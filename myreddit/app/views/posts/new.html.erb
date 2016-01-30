@@ -1,0 +1,15 @@
+<form action="<%= posts_url  %>", method="post">
+  <label for="title">Title:
+    <input type="text", name="post[title]" , value = "<%= @post.title %>">
+  </label>
+  <br>
+  <label for="url">Url:
+    <input type="text", name="post[url]", value="<%= @post.url  %>">
+  </label>
+  <br>
+  <label for="content">Content:
+    <input type="text", name="post[content]", value="<%= @post.content %>">
+  </label>
+  <br>
+  <input type="submit">
+</form>
