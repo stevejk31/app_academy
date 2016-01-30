@@ -9,6 +9,13 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = Post.new(post_params)
+    fail
+    if @post.save
+      redirect_to posts_url
+    else
+      redirect_to new_post_url
+    end
 
   end
 
@@ -34,8 +41,8 @@ class PostsController < ApplicationController
   end
 
   private
-  def posts_params
-    params.require(:posts)
-      .permit(:title, :url, :content)
+  def post_params
+    params.require(:post)
+      .permit(:title, :url, :content, :sub_id, :author_id)
   end
 end

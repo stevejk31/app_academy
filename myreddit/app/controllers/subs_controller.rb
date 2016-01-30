@@ -26,7 +26,7 @@ class SubsController < ApplicationController
   end
 
   def update
-    @sub = Sub.update(sub_params)
+    @sub = Sub.update(params[:id],sub_params)
     #TODO redirect somewher useful
     redirect_to subs_url
   end

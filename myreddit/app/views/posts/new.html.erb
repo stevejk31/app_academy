@@ -1,4 +1,6 @@
 <form action="<%= posts_url  %>", method="post">
+
+  , :author_id"
   <label for="title">Title:
     <input type="text", name="post[title]" , value = "<%= @post.title %>">
   </label>
@@ -11,5 +13,9 @@
     <input type="text", name="post[content]", value="<%= @post.content %>">
   </label>
   <br>
+<label for="sub"> 
+  <input type="text", name="post[sub_id], value= %>">
+</label>
+
   <input type="submit">
 </form>
