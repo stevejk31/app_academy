@@ -1,4 +1,34 @@
 /* PHASE 5: Cats */
 .content-header {
-  background-image: "./shared/img/cats.jpg";
+  position: relative;
+  background: url("../../shared/img/cats.jpg");
+  height: 200px;
+  color: white;
+  background-size: cover;
+  text-align: center;
 }
+
+.content-header p {
+  position: relative;
+  bottom: -70%;
+  right: 55px;
+  font-size: 36px;
+  text-shadow: 1px 1px black;
+}
+.content-header button {
+  z-index: 1;
+  position: relative;
+  height: 38px;
+  width: 105px;
+  color: black;
+  background: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 1px 6px;
+  border-radius: 5px;
+  border: 1px solid black;
+  right: -41%;
+  bottom: -98px;
+}
+/*cat iamge why not stretching?*/
+/*cat iamge why not stretching?*/
