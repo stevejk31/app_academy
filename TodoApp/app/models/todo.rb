@@ -13,12 +13,12 @@
 class Todo < ActiveRecord::Base
   validates :title, :body, presence: true
   validates_inclusion_of :done, in: [true, false]
+
   after_initialize :default_values
 
 
   def default_values
-    self.done = false;
-
+    self.done ||= false;
   end
 
 end
