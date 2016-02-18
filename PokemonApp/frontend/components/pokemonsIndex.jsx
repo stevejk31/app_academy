@@ -10,8 +10,7 @@ var PokemonsIndex = React.createClass({
       };
   },
   componentDidMount: function(){
-    var that = this;
-    this.listenerToken = PokemonStore.addListener(that._onChange);
+    this.listenerToken = PokemonStore.addListener(this._onChange);
     Utils.fetchAllPokemons();
   },
   componentWillUnmount: function () {

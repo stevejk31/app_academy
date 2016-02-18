@@ -27,6 +27,10 @@ PokemonStore.all = function() {
   return storedPokemons;
 };
 
+PokemonStore.find = function(id) {
+  return _pokemons[id];
+};
+
 var resetPokemons = function (pokemons) {
   _pokemons = {};
   // TODO check on resetiing _pokemons object
