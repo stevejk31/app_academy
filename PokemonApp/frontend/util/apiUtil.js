@@ -10,9 +10,16 @@ var Utils = {
         PokemonActions.receiveAllPokemons(pokemons);
       }
     });
+  },
+  fetchPokemon: function(id) {
+    $.ajax({
+      url: "api/pokemon/"+id,
+      type: "GET",
+      success: function(pokemon) {
+        PokemonActions.receiveSinglePokemon(pokemon);
+      }
+    });
   }
-
-
 };
 
 

@@ -15,7 +15,7 @@ window.PokemonStore = PokemonStore;
 
 var routes = (
   <Route path="/" component={App}>
-    <Route path='pokemon/:pokemonId' component={PokemonDetail}>
+    <Route path='pokemons/:pokemonId' component={PokemonDetail}>
     </Route>
   </Route>
 );

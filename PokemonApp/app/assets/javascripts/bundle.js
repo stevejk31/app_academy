@@ -61,7 +61,7 @@
 	var routes = React.createElement(
 	  Route,
 	  { path: '/', component: App },
-	  React.createElement(Route, { path: 'pokemon/:pokemonId', component: PokemonDetail })
+	  React.createElement(Route, { path: 'pokemons/:pokemonId', component: PokemonDetail })
 	);
 
 	$(function () {
@@ -19688,8 +19688,16 @@
 	        PokemonActions.receiveAllPokemons(pokemons);
 	      }
 	    });
+	  },
+	  fetchPokemon: function (id) {
+	    $.ajax({
+	      url: "api/pokemon/" + id,
+	      type: "GET",
+	      success: function (pokemon) {
+	        PokemonActions.receiveSinglePokemon(pokemon);
+	      }
+	    });
 	  }
-
 	};
 
 	module.exports = Utils;
@@ -19701,10 +19709,18 @@
 	var AppDispatcher = __webpack_require__(161);
 
 	var PokemonActions = {
+
 	  receiveAllPokemons: function (pokemons) {
 	    AppDispatcher.dispatch({
 	      actionType: "POKEMONS_RECEIVED",
 	      pokemons: pokemons
+	    });
+	  },
+
+	  receiveSinglePokemon: function (pokemon) {
+	    AppDispatcher.dispatch({
+	      actionType: "POKEMON_RECEIVED",
+	      pokemon: pokemon
 	    });
 	  }
 
@@ -20045,6 +20061,10 @@
 	      resetPokemons(payload.pokemons);
 	      PokemonStore.__emitChange();
 	      break;
+	    case "POKEMON_RECEIVED":
+	      resetPokemon(payload.pokemon);
+	      PokemonStore.__emitChange();
+	      break;
 	  }
 	};
 
@@ -20065,9 +20085,13 @@
 	var resetPokemons = function (pokemons) {
 	  _pokemons = {};
 	  // TODO check on resetiing _pokemons object
-	  pokemons.forEach(function (pokemon, index) {
-	    _pokemons[index] = pokemon;
+	  pokemons.forEach(function (pokemon) {
+	    _pokemons[pokemon.id] = pokemon;
 	  });
+	};
+
+	var resetPokemon = function (pokemon) {
+	  _pokemons[pokemon.id] = pokemon;
 	};
 
 	module.exports = PokemonStore;
@@ -26581,20 +26605,24 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var History = __webpack_require__(185).History;
 
 	var PokemonIndexItem = React.createClass({
-	  displayName: "PokemonIndexItem",
+	  displayName: 'PokemonIndexItem',
 
-
+	  mixins: [History],
+	  showDetail: function () {
+	    this.history.push("/pokemons/" + this.props.pokemon.id);
+	  },
 	  render: function () {
 	    return React.createElement(
-	      "li",
-	      { className: "poke-list-item" },
-	      "Name: ",
+	      'li',
+	      { className: 'poke-list-item', onClick: this.showDetail },
+	      'Name: ',
 	      this.props.pokemon.name,
-	      " ",
-	      React.createElement("br", null),
-	      "Poke Type: ",
+	      ' ',
+	      React.createElement('br', null),
+	      'Poke Type: ',
 	      this.props.pokemon.poke_type
 	    );
 	  }
@@ -31405,6 +31433,7 @@
 	var React = __webpack_require__(1);
 	var PropTypes = React.PropTypes;
 	var PokemonStore = __webpack_require__(165);
+	var apiUtil = __webpack_require__(159);
 
 	var PokemonDetail = React.createClass({
 	  displayName: 'PokemonDetail',
@@ -31429,7 +31458,12 @@
 	  componentWillUnmount: function () {
 	    this.listenerToken.remove();
 	  },
-
+	  componentWillReceiveProps: function (newProps) {
+	    var pokemonId = newProps.params.pokemonId;
+	    // this.setState({pokemon: PokemonStore.find(parseInt(pokemonId-1))});
+	    apiUtil.fetchPokemon(pokemonId);
+	    this.setState({ pokemon: PokemonStore.find(parseInt(pokemonId - 1)) });
+	  },
 	  render: function () {
 	    var pokeDetail = "select a pokemon";
 	    if (this.state.pokemon !== undefined) {

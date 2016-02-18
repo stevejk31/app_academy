@@ -14,6 +14,10 @@ PokemonStore.__onDispatch = function(payload) {
       resetPokemons(payload.pokemons);
       PokemonStore.__emitChange();
       break;
+    case "POKEMON_RECEIVED":
+      resetPokemon(payload.pokemon);
+      PokemonStore.__emitChange();
+      break;
   }
 };
 
@@ -34,9 +38,13 @@ PokemonStore.find = function(id) {
 var resetPokemons = function (pokemons) {
   _pokemons = {};
   // TODO check on resetiing _pokemons object
-  pokemons.forEach(function(pokemon, index) {
-    _pokemons[index] = pokemon;
+  pokemons.forEach(function(pokemon) {
+    _pokemons[pokemon.id] = pokemon;
   });
+};
+
+var resetPokemon = function(pokemon) {
+  _pokemons[pokemon.id] = pokemon;
 };
 
 module.exports = PokemonStore;

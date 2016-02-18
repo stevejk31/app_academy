@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var PokemonStore = require('../stores/pokemon');
+var apiUtil = require('../util/apiUtil');
 
 var PokemonDetail = React.createClass({
 
@@ -23,7 +24,12 @@ var PokemonDetail = React.createClass({
   componentWillUnmount: function() {
     this.listenerToken.remove();
   },
-
+  componentWillReceiveProps: function(newProps) {
+    var pokemonId = newProps.params.pokemonId;
+    // this.setState({pokemon: PokemonStore.find(parseInt(pokemonId-1))});
+    apiUtil.fetchPokemon(pokemonId);
+    this.setState({pokemon: PokemonStore.find(parseInt(pokemonId-1))});
+  },
   render: function() {
     var pokeDetail = "select a pokemon";
     if (this.state.pokemon !== undefined){
