@@ -3,16 +3,33 @@ var AppDispatcher = require('../dispatcher.js');
 
 
 
-var _benches = [];
-_benches = [
-  {lat: 37.775785, lon: -122.445979, description: "NOOOPPPPAAAAA bench" },
-{lat: 37.772045, lon: -122.437015, description: "Castro's Best Bench" },
-{lat: 37.781899, lon: -122.410426, description: "Prime Market Bench" }];
+var _benches = {};
 var BenchStore = new Store(AppDispatcher);
 
 BenchStore.all = function () {
-  return _benches.slice(0);
+  var benches = [];
+  Object.keys(_benches).forEach(function(bench){
+   benches = bench;
+ });
+  return benches;
 };
 
+BenchStore.__onDispatch = function(payload) {
+  switch(payload.actionType) {
+    case "BENCHES_RECEIVED":
+      resetBenches(payload.benches);
+      BenchStore.__emitChange();
+      break;
+  }
+};
+
+var resetBenches = function(benches) {
+  _benches = {};
+  for (var i = 0; i < benches.length; i++) {
+    _benches[benches[i].id] = benches[i];
+  }
+  console.log("benches are being loaded");
+  console.log(_benches);
+};
 
 module.exports = BenchStore;

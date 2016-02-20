@@ -1,4 +1,5 @@
 var React = require('react');
+var BenchIndex = require('../components/benchIndex.jsx');
 
 var App = React.createClass({
 
@@ -6,6 +7,7 @@ var App = React.createClass({
     return (
       <div>
         hello
+        <BenchIndex />
         {this.props.children}
       </div>
     );
