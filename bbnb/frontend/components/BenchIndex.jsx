@@ -1,6 +1,10 @@
 var React = require('react');
 var BenchStore = require('../stores/benchStore.js');
 var ApiUtils = require('../utils/utils.js');
+
+
+
+
 var BenchIndex = React.createClass({
   getInitialState: function() {
     return ({
@@ -10,16 +14,37 @@ var BenchIndex = React.createClass({
 
   componentDidMount: function() {
     ApiUtils.fetchBenches();
-    this.BenchStoreListern = BenchStore.addListener(this._updateBenches);
+    this.BenchStoreListener = BenchStore.addListener(this._onChange);
   },
 
-  _updateBenches: function() {
-    this.setState({benches: BenchStore.all()});
+  componentWillUnmount: function() {
+    this.BenchStoreListener.remove();
+  },
+
+  _onChange: function() {
+    this.setState({
+      benches: BenchStore.all()
+    });
+  },
+
+  benches: function() {
+    var benches = this.state.benches;
+    var tempBenches = [];
+    if (benches.length !== 0)
+    {
+      for (var i = 0; i < benches.length; i++) {
+        tempBenches.push(benches[i].description);
+      }
+    }
+    return tempBenches;
   },
 
   render: function() {
     return (
-      <div>Bench Index</div>
+      <div>
+        words
+        {this.benches()}
+      </div>
     );
   }
 

@@ -1,5 +1,6 @@
 var React = require('react');
 var BenchIndex = require('../components/benchIndex.jsx');
+var Map = require('../components/map.jsx');
 
 var App = React.createClass({
 
@@ -9,6 +10,7 @@ var App = React.createClass({
         hello
         <BenchIndex />
         {this.props.children}
+        <Map />
       </div>
     );
   }

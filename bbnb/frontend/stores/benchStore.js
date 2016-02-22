@@ -8,9 +8,10 @@ var BenchStore = new Store(AppDispatcher);
 
 BenchStore.all = function () {
   var benches = [];
-  Object.keys(_benches).forEach(function(bench){
-   benches = bench;
- });
+  Object.keys(_benches).forEach(function(idx){
+   benches.push(_benches[idx]);
+  });
+  console.log("store all function");
   return benches;
 };
 

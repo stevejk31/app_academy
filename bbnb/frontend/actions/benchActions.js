@@ -6,6 +6,7 @@ var BenchActions = {
       actionType: "BENCHES_RECEIVED",
       benches: benches
     });
+    console.log("actions");
   }
 
 };

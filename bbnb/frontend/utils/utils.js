@@ -10,6 +10,7 @@ var ApiUtils = {
         BenchActions.receiveAllBenches(benches);
       }
     });
+    console.log("utils");
   },
 };
 
