@@ -1,6 +1,7 @@
 var React = require('react');
 var BenchStore = require('../stores/benchStore.js');
 var ApiUtils = require('../utils/utils.js');
+var Map = require('../components/map.jsx');
 
 
 
@@ -14,6 +15,7 @@ var BenchIndex = React.createClass({
 
   componentDidMount: function() {
     ApiUtils.fetchBenches();
+    
     this.BenchStoreListener = BenchStore.addListener(this._onChange);
   },
 
@@ -35,6 +37,7 @@ var BenchIndex = React.createClass({
       for (var i = 0; i < benches.length; i++) {
         tempBenches.push(benches[i].description);
       }
+      tempBenches.push(<Map benches={this.state.benches}/>);
     }
     return tempBenches;
   },
@@ -43,6 +46,7 @@ var BenchIndex = React.createClass({
     return (
       <div>
         words
+
         {this.benches()}
       </div>
     );
