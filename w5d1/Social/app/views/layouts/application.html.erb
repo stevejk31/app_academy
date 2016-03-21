@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Social</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<h1>
+  <% if logged_in? %>
+    <%= current_user.name %>
+    <%= button_to "Log Out", session_url, method: :delete %>
+    <%# rails_helper_blah_to impliedalbel: "name", impliedurl: url address, method: %>
+    <%# link_to "name", url, default method: :get  %>
+    <%# button_to "name", url, default method: :post  %>
+  <% else %>
+    <%= link_to "Log In", new_session_url %>
+    <%= link_to "Sign Up", new_user_url %>
+  <% end %>
+
+</h1>
+<body>
+  <%= flash[:errors].join("<br>").html_safe unless flash[:errors].nil? %>
+<%= yield %>
+
+</body>
+</html>
+
+<label for="">
+  <input type="" name="name" value="">
+</label>
+<label for="Username">Username
+<input type="text" name="user[username]"></label>
+<label for="username">Username
+<input type="button" name="name" value=""></label>
+<input type="button" name="name" value="">
