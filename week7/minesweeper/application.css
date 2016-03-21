@@ -1,0 +1,21 @@
+.tile {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border-style: outset;
+  border-width: 2px;
+  background-color: lightgray;
+  position: relative;
+  float: left;
+}
+
+.row {
+  display: block;
+  width: 180px
+}
+
+.explored {
+  border-style: inset;
+  background-color: darkgray;
+}
