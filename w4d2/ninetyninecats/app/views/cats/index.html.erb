@@ -1,0 +1,8 @@
+<% @cats.each do |cat| %>
+  <%= link_to(cat.name, cat_url(cat.id) ) %>
+  <br/>
+<% end %>
+  <br/>
+  <br/>
+
+  <%= button_to "Make New Cat", new_cat_url, method: :get%>
