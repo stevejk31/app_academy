@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MusicApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<h6>
+  <% unless current_user.nil? %>
+    <%= "Welcome #{current_user.email}" %>
+    <%=  button_to "Logout", session_url, method: :delete  %>
+  <% else %>
+    <%=  button_to "Login", new_session_url, method: :get  %>
+  <% end %>
+  <%= flash[:error] %>
+<h6/>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
