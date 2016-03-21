@@ -1,0 +1,5 @@
+<% @subs.each do |sub| %>
+  <%= link_to sub.title, sub_url(sub.id) %>
+  <%= button_to "delete", sub_url(sub.id), method: :delete %>
+  <br>
+<% end %>
